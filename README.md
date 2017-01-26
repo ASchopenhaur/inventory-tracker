@@ -1,6 +1,24 @@
-# Inventory Tracker
+# README
 
-For a walkthrough, please see:
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-https://github.com/ga-wdi-lessons/angular_spa_intro
+Things you may want to cover:
 
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...

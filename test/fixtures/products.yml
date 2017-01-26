@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  image_url: MyString
+  cost: 9.99
+  name: MyString
+  url: MyString
+  country: MyString
+
+two:
+  image_url: MyString
+  cost: 9.99
+  name: MyString
+  url: MyString
+  country: MyString

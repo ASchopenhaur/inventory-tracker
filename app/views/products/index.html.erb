@@ -1,0 +1,94 @@
+<%= stylesheet_link_tag "products", property: "stylesheet" %>
+<%= javascript_include_tag "products" %>
+<div class="container" ng-app="inventory">
+  <header class="jumbotron">
+    <h1>Inventory Tracker</h1>
+  </header>
+
+  <main ng-controller="inventory_controller as vm">
+    <h2>Total Value: ${{vm.total_value()}}</h2>
+    <input type="text" class="form-control" placeholder="Filter on..." ng-model="vm.filter_on"/>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td class="criteria" ng-click="vm.is_descending = !(vm.is_descending)">
+            <span ng-if="vm.is_descending">z-a</span>
+            <span ng-if="!vm.is_descending">a-z</span>
+          </td>
+          <th class="criteria" ng-click="vm.sort_data_by('name')">Name</th>
+          <th class="criteria" ng-click="vm.sort_data_by('cost')">Cost</th>
+          <th class="criteria" ng-click="vm.sort_data_by('quantity')">Quantity</th>
+          <th class="criteria" ng-click="vm.sort_data_by('country')">Country of Origin</th>
+          <th>Notes</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="product in vm.data | filter: vm.filter_on | orderBy: vm.sort_on : vm.is_descending">
+          <!-- <td>{{$index + 1}}</td> -->
+          <td>{{product.id}}</td>
+          <td>
+            <span ng-hide="product.edit_mode">
+              <img src="{{product.image_url}}" alt="#" />
+              <a href="{{product.url}}" tabindex="-1">{{product.name}}</a><br/>
+              <btn class="edit-btn" ng-click="vm.edit(product)" ng-disabled="vm.editing">&#x270D; Edit</btn>
+            </span>
+            <span ng-show="product.edit_mode">
+              <input type="text"  class="edit-input wide-input" ng-model="vm.new_product.name" placeholder="Product name..."><br/>
+              <input type="text"  class="edit-input wide-input" ng-model="vm.new_product.url" placeholder="Product url..."><br/>
+              <input type="text"  class="edit-input wide-input" ng-model="vm.new_product.image_url" placeholder="Image url..."><br/>
+              <btn class="submit-btn" ng-click="vm.all_fields_update(product)">Submit</btn>
+              <btn class="cancel-btn" ng-click="vm.edit_cancel(product)">Cancel</btn>
+            </span>
+          </td>
+          <td>
+            <span ng-hide="product.edit_mode">${{product.cost}}</span>
+            <input type="number" class="edit-input narrow-input" ng-model="vm.new_product.cost" placeholder="Cost..." ng-show="product.edit_mode">
+          </td>
+          <td>
+            <span ng-hide="product.edit_mode">
+              <input type="number" class="narrow-input" ng-model="product.quantity" ng-blur="vm.single_field_update(product)" ng-disabled="vm.editing && !product.edit_mode"/>
+            </span>
+            <span ng-show="product.edit_mode">
+              <input type="number" class="edit-input narrow-input" ng-model="vm.new_product.quantity" placeholder="Quantity...">
+            </span>
+          </td>
+          <td>
+            <span ng-hide="product.edit_mode">{{product.country}}</span>
+            <input type="text" class="edit-input" ng-model="vm.new_product.country" placeholder="Country..." ng-show="product.edit_mode">
+          </td>
+          <td>
+            <span ng-hide="product.edit_mode">
+              <input type="text" ng-model="product.notes" ng-blur="vm.single_field_update(product)" ng-disabled="vm.editing && !product.edit_mode"/>
+            </span>
+            <span ng-show="product.edit_mode">
+              <input type="text" class="edit-input wide-input" ng-model="vm.new_product.notes" placeholder="Notes...">
+            </span>
+          </td>
+          <td ng-click="vm.destroy(product.id)" ng-hide="vm.editing">
+            <span class="ctl-btn">&cross;</span>
+          </td>
+        </tr>
+        <tr ng-hide="vm.editing">
+          <td colspan="2">
+            New Product:<br/>
+            <input type="text" ng-model="vm.new_product.name" placeholder="Name" />
+          </td>
+          <td>
+            <br/>
+            <input type="number" ng-model="vm.new_product.cost" placeholder="Cost" />
+          </td>
+          <td>
+            <br/>
+            <input type="text" ng-model="vm.new_product.country" placeholder="Country" />
+          </td>
+          <td colspan="2">
+            <br/>
+            <input class="url-box" type="text" ng-model="vm.new_product.image_url" placeholder="Image Url" />
+          </td>
+          <td ng-click="vm.create()">Add<br/><span class="ctl-btn">&plus;</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</div>

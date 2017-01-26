@@ -1,0 +1,68 @@
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+/*
+*= require bootstrap
+*/
+@mixin default-edit-btn {
+  border: solid 1px;
+  padding: 2px;
+  font-size: .8em;
+  &:hover {
+    background-color: #666;
+    color: white;
+    cursor: pointer;
+  }
+}
+.criteria {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.ctl-btn {
+  color: green;
+  font-size: 1.6em;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.edit-btn{ @include default-edit-btn; }
+.submit-btn{ @include default-edit-btn; }
+.cancel-btn{ @include default-edit-btn; }
+
+.edit-btn[disabled] {
+  cursor: not-allowed;
+  &:hover {
+    background-color: white;
+    color: black;
+  }
+}
+.submit-btn {
+  color: green;
+  margin-right: 30px;
+  &:hover {
+    background-color: green;
+  }
+}
+.cancel-btn {
+  color: red;
+  &:hover {
+    background-color: red;
+  }
+}
+.edit-input {
+  font-size: 0.8em;
+}
+.narrow-input{
+  width: 60px;
+}
+.wide-input {
+  width: 170px;
+}
+.url-box {
+  width: 250px;
+  font-size: .8em;
+  padding: 3px;
+}
+img {
+  width: 20px;
+}
